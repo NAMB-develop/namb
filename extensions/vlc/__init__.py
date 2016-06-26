@@ -1,0 +1,26 @@
+NAME="vlc"
+VERSION="0.1"
+NAMB_VERSION="0.1"
+EXTENSION_DEPENDENCIES=[]
+MODULE=None
+
+import urllib2, os, importlib
+
+def is_prepared():
+    return os.path.isfile(__path__[0] + os.sep + "generated_vlc.py")
+    
+def prepare():
+    request = urllib2.urlopen("https://git.videolan.org/?p=vlc/bindings/python.git;a=blob_plain;f=generated/vlc.py;hb=HEAD")
+    response = request.read()
+
+    with open(__path__[0]+os.sep+"generated_vlc.py",'wb') as f:
+        f.write(response)
+
+def load():
+    import os, sys
+    VLC_PATH="X:\\My Documents\\Projects\\VLC"
+    if sys.platform.startswith('win'):
+        os.environ['PATH'] =  VLC_PATH + ';' + os.environ['PATH']
+    global MODULE
+    MODULE = importlib.import_module("extensions.vlc."+"generated_vlc")
+    return MODULE

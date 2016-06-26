@@ -1,3 +1,10 @@
+# Project-specific
+extensions/*/*
+!extensions/*/__init__.py
+
+plugins/*/*
+!plugins/*/__init__.py
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
