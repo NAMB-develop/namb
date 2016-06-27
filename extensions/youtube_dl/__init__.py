@@ -8,6 +8,7 @@ import zipfile
 import urllib2
 import os
 import importlib
+import StringIO
 
 def is_prepared():
     return os.path.isdir(__path__[0]+os.sep+"youtube_dl")
