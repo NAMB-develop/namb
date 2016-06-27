@@ -20,18 +20,22 @@ def remove():
 def prepare():
     response = urllib2.urlopen("https://github.com/NAMB-develop/jazzradio_com/archive/master.zip")
     zipcontent = response.read()
-    s=StringIO.StringIO()
-    s.write(zipcontent)
-    z=zipfile.ZipFile(s,'r')
+    s=StringIO.StringIO(zipcontent)
+    try:
+        z=zipfile.ZipFile(s,'r')
+    except zipfile.BadZipfile:
+        print("Zip extraction failed!")
+        raise
+    
+    l=z.namelist()
 
-    ss=StringIO.StringIO()
-    zz=zipfile.ZipFile(ss,'w')
-    for member in z.namelist():
-        if member.split('jazzradio_com-master/')[1]:
-            zz.writestr('jazzradio_com/'+member.split('jazzradio_com-master/')[1])
+    for i in z.filelist:
+        i.filename=''.join(i.filename.split('-master'))
 
-    zz.extractall(__path__[0])
-    zz.close()
+    for i in l:
+        z.extract(i)
+
+    z.extractall(__path__[0])
     z.close()
 
 def load():
