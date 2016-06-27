@@ -35,7 +35,6 @@ def prepare():
     for i in l:
         z.extract(i)
 
-    z.extractall(__path__[0])
     z.close()
 
 def load():
