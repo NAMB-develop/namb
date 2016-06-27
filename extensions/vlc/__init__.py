@@ -10,7 +10,11 @@ path=os.path.join(__path__[0], "vlc")
 
 def is_prepared():
     global path
-    return os.path.isfile(path + os.sep + "generated_vlc.py")
+    return os.path.isdir(path)
+
+def remove():
+    global path
+    os.remove(path)
     
 def prepare():
     request = urllib2.urlopen("https://git.videolan.org/?p=vlc/bindings/python.git;a=blob_plain;f=generated/vlc.py;hb=HEAD")
