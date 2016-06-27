@@ -35,7 +35,8 @@ def prepare():
 
     for i in l:
         if '/youtube_dl/' in i:
-            z.extract(i, __path__[0])
+            if i.split('/youtube_dl/')[1]:
+                z.extract(i, __path__[0])
 
     z.close()
 ##    response = urllib2.urlopen('https://github.com/rg3/youtube-dl/archive/master.zip')
