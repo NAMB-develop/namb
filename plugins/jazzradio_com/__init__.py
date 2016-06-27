@@ -18,7 +18,7 @@ def remove():
 
 #UNTESTED
 def prepare():
-    response = urllib2.urlopen("https://github.com/NAMB-develop/jazzradio_com/archive/master.zip")
+    response = urllib2.urlopen("https://github.com/NAMB-develop/jazzradio_com/archive/master.zip") #TODO: Implement versioning
     zipcontent = response.read()
     s=StringIO.StringIO(zipcontent)
     try:
