@@ -33,7 +33,7 @@ def prepare():
         i.filename=''.join(i.filename.split('-master'))
 
     for i in l:
-        z.extract(i)
+        z.extract(i, __path__[0])
 
     z.close()
 
