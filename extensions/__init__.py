@@ -22,8 +22,8 @@ def load_extensions_headers():
 def load_extension(name):
     import main
     if compare_versions(main.NAMB_VERSION, headers[name].NAMB_VERSION) > -1:
-        if not headers[name].is_prepared():
-            headers[name].prepare()
+        if not headers[name].is_installed():
+            headers[name].install()
         _extensions[name]=headers[name].load()
     else:
         raise Exception("Version of extension not supported.")

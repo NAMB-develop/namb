@@ -26,8 +26,8 @@ def load_plugin(name):
         for i in headers[name].DEPENDENCIES:
             if i not in extensions.headers:
                 raise Exception("Dependency not satisfied: %s" % (i))
-        if not headers[name].is_prepared():
-            headers[name].prepare()
+        if not headers[name].is_installed():
+            headers[name].install()
         _plugins[name]=headers[name].load()
     else:
         raise Exception("Version of plugin not supported.")
