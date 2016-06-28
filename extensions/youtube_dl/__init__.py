@@ -10,13 +10,13 @@ import os
 import importlib
 import StringIO
 
-def is_prepared():
+def is_installed():
     return os.path.isdir(__path__[0]+os.sep+"youtube_dl")
 
-def remove():
+def uninstall():
     os.remove(__path__[0]+os.sep+"youtube_dl")
 
-def prepare():
+def install():
     response = urllib2.urlopen('https://github.com/rg3/youtube-dl/archive/master.zip') #TODO: Implement versioning
     zipcontent = response.read()
     s=StringIO.StringIO(zipcontent)

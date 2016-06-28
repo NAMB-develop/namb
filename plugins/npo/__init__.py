@@ -6,13 +6,13 @@ MODULE=None
 
 import importlib, os
 
-def is_prepared():
+def is_installed():
     return os.path.isdir(__path__[0]+os.sep+"npo")
 
-def remove():
+def uninstall():
     os.remove(__path__[0]+os.sep+"npo")
 
-def prepare():
+def install():
     response = urllib2.urlopen("https://github.com/NAMB-develop/npo/archive/master.zip") #TODO: Implement versioning
     zipcontent = response.read()
     s=StringIO.StringIO(zipcontent)

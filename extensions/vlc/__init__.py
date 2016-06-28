@@ -8,15 +8,15 @@ import urllib2, os, importlib
 
 path=os.path.join(__path__[0], "vlc")
 
-def is_prepared():
+def is_installed():
     global path
     return os.path.isdir(path)
 
-def remove():
+def uninstall():
     global path
     os.remove(path)
     
-def prepare():
+def install():
     request = urllib2.urlopen("https://git.videolan.org/?p=vlc/bindings/python.git;a=blob_plain;f=generated/vlc.py;hb=HEAD")
     response = request.read()
 

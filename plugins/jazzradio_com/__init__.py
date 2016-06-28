@@ -10,14 +10,14 @@ import urllib2
 import os
 import StringIO
 
-def is_prepared():
+def is_installed():
     return os.path.isdir(__path__[0]+os.sep+"jazzradio_com")
 
-def remove():
+def uninstall():
     os.remove(__path__[0]+os.sep+"jazzradio_com")
 
 #UNTESTED
-def prepare():
+def install():
     response = urllib2.urlopen("https://github.com/NAMB-develop/jazzradio_com/archive/master.zip") #TODO: Implement versioning
     zipcontent = response.read()
     s=StringIO.StringIO(zipcontent)
