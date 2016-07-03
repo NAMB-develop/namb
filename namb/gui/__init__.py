@@ -37,20 +37,22 @@ class Bar(object):
         print("Settingsbutton was clicked.")
         raise NotImplemented("Oops.")
 
-    def interpret(self, key):
-        if key=='enter':
+    def receive(self, key):
+        import namb.keys
+        if key==namb.keys.ENTER:
             if self.focus[1]==0:
                 if self.focus[0]==1:
                     self.closebuttonclick()
                 elif self.focus[0]==0:
                     self.settingsbuttonclick()
-        if key=='left':
+        if key==namb.keys.LEFT:
             self.focus[0]=self.focus[0]-1 if self.focus[0]>0 else 0
 
     def __init__(self):
         self.focus=(1,0)
-        import namb.userinput as userinput
-        userinput.set_interpreter(self)
+        import namb.ui_processor as userinput
+        import namb.keys
+        userinput.set_receiver(self)
 
         self.animationspeed=5
         self.animationincrement=5
@@ -87,9 +89,9 @@ class Bar(object):
         self.settingsbuttoncanvas.bind("<Configure>", _draw_circle)
         
         def do():
-            userinput.event('enter')
+            userinput.process(namb.keys.ENTER)
 
-        self.barframe.after(2000, do)
+        #self.barframe.after(2000, do)
         
     def menu_vanish(self):
         self.disappear()

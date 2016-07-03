@@ -15,8 +15,10 @@ if __name__=="__main__":
     import extensions
     import plugins
 
+    extensions.load_extension("vlc")
     plugins.load_plugin("jazzradio_com")
     jazzradio_com=plugins.get_plugin("jazzradio_com")
-    jazzradio_com.display(m.p.frame)
+    jazzradio_com.init()
+    #jazzradio_com.display(m.p.frame)
     
     m.display()
