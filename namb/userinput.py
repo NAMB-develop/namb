@@ -1,13 +1,13 @@
-INTERPRETER=None
+RECEIVER=None
 
-def set_interpreter(interpreter):
-    global INTERPRETER
-    INTERPRETER=interpreter
+def set_receiver(receiver):
+    global RECEIVER
+    RECEIVER=receiver
 
-def get_interpreter():
-    global INTERPRETER
-    return INTERPRETER
+def get_receiver():
+    global RECEIVER
+    return RECEIVER
 
 def event(key):
-    print("Received event: " + key)
-    INTERPRETER.interpret(key)
+    print("Processed event: " + key)
+    RECEIVER.receive(key)

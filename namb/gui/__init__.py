@@ -4,19 +4,13 @@ if sys.version_info[0] > 2:
 else:
     import Tkinter as tkint
 
+global fullscreen
 fullscreen=False
 
-root=tkint.Tk()
-global width, height
-width=1280.0
-height=720.0
-if fullscreen:
-    width=float(root.winfo_screenwidth())
-    height=float(root.winfo_screenheight())
-    root.overrideredirect(1)
-root.bind("<Escape>", lambda e: root.destroy())
-root.geometry("%dx%d+0+0" % (width, height))
-root.focus_set()
+global root
+root=None
+
+
 
 class LoadingButton(object):
 
@@ -159,6 +153,19 @@ class Bar(object):
 class MainWindow(object):
     
     def __init__(self):
+        global root
+        root=tkint.Tk()
+        global width, height
+        width=1280.0
+        height=720.0
+        if fullscreen:
+            width=float(root.winfo_screenwidth())
+            height=float(root.winfo_screenheight())
+            root.overrideredirect(1)
+        root.bind("<Escape>", lambda e: root.destroy())
+        root.geometry("%dx%d+0+0" % (width, height))
+        root.focus_set()
+        
         self.mainframe = tkint.Frame(root, bg='black')
         self.mainframe.place(x=0, y=0, relwidth=1, relheight=1)
 
