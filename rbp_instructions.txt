@@ -1,0 +1,7 @@
+Add dtoverlay=lirc-rpi to /boot/config.txt
+Reboot
+Use irdb-get to find correct config file for your remote
+Put config file in /etc/lirc/lircd.conf.d/
+Install python2
+Install python2-lirc
+
