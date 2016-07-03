@@ -29,15 +29,30 @@ class PluginScreenContainer(object):
 
 class Bar(object):
 
+    class PluginButton(object):
+
+        def __init__(self, parent):
+            self.parent = parent
+
+        def focus():
+            pass
+        
+        def defocus():
+            pass
+
+        def enter():
+            pass
+
     def closebuttonclick(self, event=None):
         print("Closebutton was clicked.")
         self.barframe.master.destroy()
 
     def settingsbuttonclick(self, event=None):
         print("Settingsbutton was clicked.")
-        raise NotImplemented("Oops.")
+        raise NotImplementedError("Oops.")
 
     def receive(self, key):
+        print("Received: %s" % key)
         import namb.keys
         if key==namb.keys.ENTER:
             if self.focus[1]==0:
@@ -45,11 +60,24 @@ class Bar(object):
                     self.closebuttonclick()
                 elif self.focus[0]==0:
                     self.settingsbuttonclick()
+
+        old = self.focus
         if key==namb.keys.LEFT:
-            self.focus[0]=self.focus[0]-1 if self.focus[0]>0 else 0
+            if self.focus[1]==0:
+                self.focus[0]=0
+        if key==namb.keys.RIGHT:
+            if self.focus[1]==0:
+                self.focus[0]=1
+        if key==namb.keys.UP:
+            if self.focus[1]==1:
+                self.focus[1]=0
+        if key==namb.keys.DOWN:
+            if self.focus[1]==0:
+                self.focus[1]=1
+            
 
     def __init__(self):
-        self.focus=(1,0)
+        self.focus=[1,0]
         import namb.ui_processor as userinput
         import namb.keys
         userinput.set_receiver(self)
@@ -157,6 +185,7 @@ class MainWindow(object):
     def __init__(self):
         global root
         root=tkint.Tk()
+        self.root=root
         global width, height
         width=1280.0
         height=720.0
@@ -223,6 +252,12 @@ if __name__=="__main__":
     print("Running in GUI debug mode.")
     import os
     sys.path.insert(0, os.path.join(sys.path[0],'..','..'))
+
+    
+    
     m=MainWindow()
+    import namb.keyboard
+    namb.keyboard.setup()
+    namb.keyboard.bind(m.root)
     m.display()
     
