@@ -1,4 +1,4 @@
-import namb.ui_processor
+import namb.userinput
 
 _DICT={}
 
