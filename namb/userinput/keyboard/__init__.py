@@ -12,9 +12,7 @@ def setup():
 def bind(root):
     global _DICT
     for i in _DICT.keys():
-        print(i)
-        print(_DICT[i])
-        root.bind(i, lambda e, z=i: namb.ui_processor.process(_DICT[z]))
+        root.bind(i, lambda e, z=i: namb.userinput.queue(_DICT[z]))
     
 def save():
     import os

@@ -10,7 +10,11 @@ fullscreen=False
 global root
 root=None
 
+import namb.userinput
 
+def ui_loop():
+    namb.userinput.process_next()
+    root.after(10, ui_loop)
 
 class LoadingButton(object):
 
@@ -45,11 +49,10 @@ class Bar(object):
 
     def closebuttonclick(self, event=None):
         print("Closebutton was clicked.")
-        self.barframe.master.destroy()
+        #self.barframe.master.destroy()
 
     def settingsbuttonclick(self, event=None):
         print("Settingsbutton was clicked.")
-        raise NotImplementedError("Oops.")
 
     def receive(self, key):
         print("Received: %s" % key)
@@ -78,8 +81,7 @@ class Bar(object):
 
     def __init__(self):
         self.focus=[1,0]
-        import namb.ui_processor as userinput
-        import namb.keys
+        import namb.userinput as userinput
         userinput.set_receiver(self)
 
         self.animationspeed=5
@@ -115,11 +117,8 @@ class Bar(object):
             self.settingsbuttoncanvas.delete("lines")
             self.settingsbuttoncanvas.create_rectangle(self.settingsbuttonframe.winfo_width()/5, self.settingsbuttonframe.winfo_height()/5, self.closebuttonframe.winfo_width()-(self.closebuttonframe.winfo_width()/5), self.closebuttonframe.winfo_height()-(self.closebuttonframe.winfo_height()/5), width=4, outline="gray", tags=("lines",))
         self.settingsbuttoncanvas.bind("<Configure>", _draw_circle)
-        
-        def do():
-            userinput.process(namb.keys.ENTER)
 
-        #self.barframe.after(2000, do)
+        ui_loop()
         
     def menu_vanish(self):
         self.disappear()
@@ -256,8 +255,8 @@ if __name__=="__main__":
     
     
     m=MainWindow()
-    import namb.keyboard
-    namb.keyboard.setup()
-    namb.keyboard.bind(m.root)
+    import namb.userinput.keyboard
+    namb.userinput.keyboard.setup()
+    namb.userinput.keyboard.bind(m.root)
     m.display()
     
