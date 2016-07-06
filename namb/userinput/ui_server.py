@@ -27,11 +27,16 @@ document.addEventListener("keydown", key, false);
 CRLF="\r\n\r\n"
 CRLF_I="\r\n"
 
-
+def get_bind_ip():
+    s=socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+    s.connect(("8.8.8.8",80))
+    addr=s.getsockname()
+    s.close()
+    return addr[0]
 
 def send_html(conn):
     reply="HTTP/1.1 200 OK%s"%CRLF_I
-    reply=reply+"Content-type: text/html%s"%CRLF
+    reply=reply+"Content-type: text/html%s"%CRLF_I
     reply=reply+CRLF
     reply=reply+html+CRLF
     conn.send(reply)
@@ -65,10 +70,11 @@ def process_get(conn, data):
             send_html(conn)
         
 def run():
+    server=socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+    server.bind((get_bind_ip(),8000))
+    server.listen(1)
+    
     def do():
-        server=socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-        server.bind(('127.0.0.1',8000))
-        server.listen(1)
         while True:
             conn, addr = server.accept()
             data=conn.recv(1024)
