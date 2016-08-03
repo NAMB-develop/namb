@@ -5,6 +5,8 @@ extensions/*/*
 plugins/*/*
 !plugins/*/__init__.py
 
+.settings
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
