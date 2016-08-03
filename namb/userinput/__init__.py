@@ -21,5 +21,5 @@ def process_next(block=False):
         process(_QUEUE.get(block))
 
 def process(key):
-    print("Processed event: " + key)
+    #print("Processed event: " + key)
     _RECEIVER.receive(key)
