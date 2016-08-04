@@ -5,6 +5,28 @@ headers={}
 import os
 import importlib
 
+_filehandles={}
+
+import namb.files
+
+class FileHandle(object):
+
+    def __init__(self, pluginname):
+        _filehandles[pluginname]=self
+        self.__path=os.path.join(__path__[0], "..", ".settings", pluginname)
+        if not os.path.isdir(self.path):
+            os.mkdir(self.path)
+
+    def get_file_handle(self, *path):
+        if "." in path or ".." in path:
+            raise Exception("Illegal to traverse out of path!")
+            return None
+        dirs=path[:-1]
+        if dirs:
+            os.makedirs(os.path.join(*dirs))
+        p=os.path.join(dirs)
+        return namb.files.file_handle(p, 'a+')
+
 def init():
     l = [os.path.join(__path__[0], i) for i in os.listdir(__path__[0])]
     ll = [i for i in l if os.path.isdir(i)]
