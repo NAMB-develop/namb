@@ -1,0 +1,19 @@
+pkgname=projects-namb
+pkgdesc="A fake Projects package"
+pkgver=1.0
+pkgrel=1
+epoch=1
+arch=('x86_64' 'i686' 'armv6h' 'armv7h')
+depends=('python2' 'tk' 'python2-pillow')
+optdepends=('vlc-git: for media playback through vlc (recommended)'
+	    'python2-lirc: for IR remote control'
+	    'lirc: for IR remote control'
+)
+conflicts=("${_name}")
+provides=('projects-namb')
+build() {
+:
+}
+package() {
+:
+}

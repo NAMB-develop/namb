@@ -1,6 +1,6 @@
 import sys, traceback
 
-_DEBUG=True
+_DEBUG=False
 
 _realo=sys.modules["__builtin__"].open
 _realf=sys.modules["__builtin__"].file
