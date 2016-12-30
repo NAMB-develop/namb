@@ -28,6 +28,15 @@ def install():
             raise
     try:
         f=open(path+os.sep+"__init__.py","w")
+        f.write("""
+from extensions.vlc.vlc.generated_vlc import *
+
+global INSTANCE
+INSTANCE=None
+global PLAYER
+PLAYER=None
+"""
+                )
         f.close()
     except OSError:
         raise
@@ -40,5 +49,5 @@ def load():
     if sys.platform.startswith('win'):
         os.environ['PATH'] =  VLC_PATH + ';' + os.environ['PATH']
     global MODULE
-    MODULE = importlib.import_module("extensions.vlc.vlc."+"generated_vlc")
+    MODULE = importlib.import_module("extensions.vlc.vlc")
     return MODULE

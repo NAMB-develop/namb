@@ -14,3 +14,11 @@ class DebugLoadingScreen(object):
         self.canvas.itemconfig("text",text=message)
         
         
+class SplashScreen(object):
+
+    def __init__(self, master):
+        self.frame=tkint.Frame(master, bg="black")
+        self.frame.place(x=0,y=0,width=master.winfo_width(), height=master.winfo_height())
+
+
+

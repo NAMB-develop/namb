@@ -118,7 +118,7 @@ class Bar(object):
             self.settingsbuttoncanvas.create_rectangle(self.settingsbuttonframe.winfo_width()/5, self.settingsbuttonframe.winfo_height()/5, self.closebuttonframe.winfo_width()-(self.closebuttonframe.winfo_width()/5), self.closebuttonframe.winfo_height()-(self.closebuttonframe.winfo_height()/5), width=4, outline="gray", tags=("lines",))
         self.settingsbuttoncanvas.bind("<Configure>", _draw_circle)
 
-        ui_loop()
+        #ui_loop()
         
     def menu_vanish(self):
         self.disappear()
@@ -179,23 +179,27 @@ class Bar(object):
             self.canvas.create_line(0,i,width,i , tags=("gradient",), fill=color)
         self.canvas.lower("gradient")  
 
+def init_tk():
+    global root
+    root=tkint.Tk()
+    global width, height
+    width=1280.0
+    height=720.0
+    if fullscreen:
+        width=float(root.winfo_screenwidth())
+        height=float(root.winfo_screenheight())
+        root.overrideredirect(1)
+    root.bind("<Escape>", lambda e: root.destroy())
+    root.geometry("%dx%d+0+0" % (width, height))
+    root.focus_set()
+    
+
 class MainWindow(object):
     
     def __init__(self):
-        global root
-        root=tkint.Tk()
+        if not root:
+            init_tk()
         self.root=root
-        global width, height
-        width=1280.0
-        height=720.0
-        if fullscreen:
-            width=float(root.winfo_screenwidth())
-            height=float(root.winfo_screenheight())
-            root.overrideredirect(1)
-        root.bind("<Escape>", lambda e: root.destroy())
-        root.geometry("%dx%d+0+0" % (width, height))
-        root.focus_set()
-        
         self.mainframe = tkint.Frame(root, bg='black')
         self.mainframe.place(x=0, y=0, relwidth=1, relheight=1)
 

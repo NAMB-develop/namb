@@ -31,6 +31,9 @@ def load_extension(name):
 def get_extension(name):
     return _extensions[name] if name in _extensions else None
 
+def is_loaded(name):
+    return name in _extensions
+
 def compare_versions(v1, v2):
     v1_splitted=tuple(int(i) for i in v1.split("."))
     v2_splitted=tuple(int(i) for i in v2.split("."))

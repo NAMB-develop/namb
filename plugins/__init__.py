@@ -57,6 +57,9 @@ def load_plugin(name):
 def get_plugin(name):
     return _plugins[name] if name in _plugins else None
 
+def is_loaded(name):
+    return name in _plugins
+
 def compare_versions(v1, v2):
     v1_splitted=tuple(int(i) for i in v1.split("."))
     v2_splitted=tuple(int(i) for i in v2.split("."))

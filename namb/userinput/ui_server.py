@@ -68,19 +68,28 @@ def process_get(conn, data):
             conn.close()
         else:
             send_html(conn)
+
+def stop():
+    global stopper
+    stopper.set()
         
 def run():
     server=socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-    server.bind((get_bind_ip(),8000))
+    server.bind(('127.0.0.1',8000))
     server.listen(1)
     
     def do():
-        while True:
+        while not stopper.is_set():
             conn, addr = server.accept()
             data=conn.recv(1024)
             process_get(conn, data)        
+
+    import namb.userinput.keyboard
+    namb.userinput.keyboard.setup()
     
     import threading
+    global stopper
+    stopper=threading.Event()
     t=threading.Thread(None, do)
     t.daemon=True
     t.start()

@@ -20,10 +20,10 @@ def call_while_waiting_for(callback, *func):
     #t.daemon=True
     t.start()
 
-    def check():
+    def running():
         return t.is_alive()
 
     def get():
         return t.join()
     
-    callback(check, get)
+    callback(running, get)

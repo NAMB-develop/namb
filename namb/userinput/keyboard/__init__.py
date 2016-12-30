@@ -3,6 +3,8 @@ import namb.userinput
 _DICT={}
 
 def setup():
+    if _DICT:
+        return
     import json, os
     f=open(os.path.join(__path__[0], "config.json"))
     global _DICT

@@ -60,7 +60,7 @@ def _win_loop():
     while not stopper.is_set():
         pythoncom.PumpWaitingMessages()
 
-def release():
+def unhook():
     if 'linux' in sys.platform:
         manager.cancel()
     elif 'win' in sys.platform:
