@@ -67,7 +67,7 @@ class List(object):
             self.shiftshift()
 
     def select(self):
-        self.frame.after(1, self.items[self.at][1]['callback'])
+        self.frame.after(1, lambda: self.items[self.at][1]['callback'][0](*self.items[self.at][1]['callback'][1:]))
         #raise NotImplementedError("")
 
     def schedule(self, delay=1, *task):

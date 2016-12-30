@@ -11,7 +11,7 @@ import os
 import StringIO
 
 def is_installed():
-    return os.path.isdir(__path__[0]+os.sep+"radionpo")
+    return os.path.isdir(__path__[0]+os.sep+"namb_radionpo")
 
 def uninstall():
     os.remove(__path__[0]+os.sep+"radionpo")

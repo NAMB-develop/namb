@@ -7,7 +7,7 @@ MODULE=None
 import importlib, os, urllib2, StringIO, zipfile
 
 def is_installed():
-    return os.path.isdir(__path__[0]+os.sep+"npo")
+    return os.path.isdir(__path__[0]+os.sep+"namb_npo")
 
 def uninstall():
     os.remove(__path__[0]+os.sep+"npo")

@@ -1,5 +1,5 @@
 from simplejson.tests import test_namedtuple
-from __main__ import name
+#from __main__ import name
 _plugins_path_list=[]
 _plugins={}
 headers={}
