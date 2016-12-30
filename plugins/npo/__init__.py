@@ -4,7 +4,7 @@ VERSION="0.1"
 NAMB_VERSION="0.1"
 MODULE=None
 
-import importlib, os
+import importlib, os, urllib2, StringIO, zipfile
 
 def is_installed():
     return os.path.isdir(__path__[0]+os.sep+"npo")
@@ -13,7 +13,7 @@ def uninstall():
     os.remove(__path__[0]+os.sep+"npo")
 
 def install():
-    response = urllib2.urlopen("https://github.com/NAMB-develop/npo/archive/master.zip") #TODO: Implement versioning
+    response = urllib2.urlopen("https://github.com/NAMB-develop/namb_npo/archive/master.zip") #TODO: Implement versioning
     zipcontent = response.read()
     s=StringIO.StringIO(zipcontent)
     try:
@@ -33,5 +33,5 @@ def install():
     z.close()
 
 def load():
-    MODULE=importlib.import_module("plugins.npo.npo")
+    MODULE=importlib.import_module("plugins.npo.namb_npo")
     return MODULE

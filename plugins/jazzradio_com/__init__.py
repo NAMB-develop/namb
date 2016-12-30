@@ -18,7 +18,7 @@ def uninstall():
 
 #UNTESTED
 def install():
-    response = urllib2.urlopen("https://github.com/NAMB-develop/jazzradio_com/archive/master.zip") #TODO: Implement versioning
+    response = urllib2.urlopen("https://github.com/NAMB-develop/namb_jazzradio_com/archive/master.zip") #TODO: Implement versioning
     zipcontent = response.read()
     s=StringIO.StringIO(zipcontent)
     try:
@@ -30,6 +30,7 @@ def install():
     l=z.namelist()
 
     for i in z.filelist:
+        #i.filename=''.join(i.filename.split('namb_'))
         i.filename=''.join(i.filename.split('-master'))
 
     for i in l:
@@ -38,5 +39,5 @@ def install():
     z.close()
 
 def load():
-    MODULE=importlib.import_module("plugins.jazzradio_com.jazzradio_com")
+    MODULE=importlib.import_module("plugins.jazzradio_com.namb_jazzradio_com")
     return MODULE
