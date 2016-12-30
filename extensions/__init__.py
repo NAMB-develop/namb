@@ -5,6 +5,10 @@ headers={}
 import os
 import importlib
 
+def load():
+    init()
+    load_extensions_headers()
+
 def init():
     l = [os.path.join(__path__[0], i) for i in os.listdir(__path__[0])]
     ll = [i for i in l if os.path.isdir(i)]
@@ -19,12 +23,22 @@ def load_extensions_headers():
         headers[m.NAME]=m
     return headers
 
+def install_plugin(name):
+    if headers[name].is_installed():
+        return
+    return headers[name].install()
+    
+def is_installed(name):
+    return headers[name].is_installed()
+
 def load_extension(name):
     import main
     if compare_versions(main.NAMB_VERSION, headers[name].NAMB_VERSION) > -1:
         if not headers[name].is_installed():
-            headers[name].install()
+            raise Exception("Extension not installed")
+            #headers[name].install()
         _extensions[name]=headers[name].load()
+        return _extensions[name]!=None
     else:
         raise Exception("Version of extension not supported.")
 
@@ -48,6 +62,3 @@ def compare_versions(v1, v2):
         return -99
     
     
-
-init()
-load_extensions_headers()

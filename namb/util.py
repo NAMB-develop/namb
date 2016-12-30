@@ -1,5 +1,35 @@
 
-import threading
+import threading, Queue
+
+class Worker(threading.Thread):
+    
+    def __init__(self, group=None, target=None, name=None,
+                 args=(), kwargs={}, Verbose=None):
+        threading.Thread.__init__(self, group, target, name, args, kwargs, Verbose)
+        self.inqueue = Queue.Queue()
+        self.outqueue = Queue.Queue()
+        self.stopped = False
+        self.daemon = True
+        
+    def stop(self):
+        self.stopped = True
+        self.inqueue.put(None)
+        
+    def submit(self, *task):
+        self.inqueue.put(task)
+        
+    def run(self):
+        while not self.stopped:
+            task = self.inqueue.get()
+            if task:
+                try:
+                    result=task[0](*task[1:])
+                except Exception as e:
+                    result=e
+                self.outqueue.put(result)
+        
+        threading.Thread.join(self)
+    
 
 class ThreadWithReturnValue(threading.Thread):
     def __init__(self, group=None, target=None, name=None,

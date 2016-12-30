@@ -26,6 +26,7 @@ def start():
     global m
     m=gui.MainWindow()
     import plugins
+    #plugins.load_plugin("jazzradio_com")
     global g
     g=plugins.get_plugin("jazzradio_com")
     g.init()
@@ -118,6 +119,7 @@ def load_routine():
             print("Loading plugin")
             import plugins
             plu=q.split("plugin_")[1]
+            #print(plu)
             if not plugins.is_loaded(plu):
                 namb.util.call_while_waiting_for(loop, plugins.load_plugin, plu)
             if not lst:

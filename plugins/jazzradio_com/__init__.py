@@ -37,6 +37,7 @@ def install():
         z.extract(i, __path__[0])
 
     z.close()
+    return True
 
 def load():
     MODULE=importlib.import_module("plugins.jazzradio_com.namb_jazzradio_com")

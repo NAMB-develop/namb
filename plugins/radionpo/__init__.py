@@ -1,19 +1,24 @@
-NAME="npo"
-DEPENDENCIES=["vlc","youtube_dl"]
+NAME="radionpo"
+DEPENDENCIES=["vlc"]
 VERSION="0.1"
 NAMB_VERSION="0.1"
 MODULE=None
 
-import importlib, os, urllib2, StringIO, zipfile
+import importlib
+import zipfile
+import urllib2
+import os
+import StringIO
 
 def is_installed():
-    return os.path.isdir(__path__[0]+os.sep+"npo")
+    return os.path.isdir(__path__[0]+os.sep+"radionpo")
 
 def uninstall():
-    os.remove(__path__[0]+os.sep+"npo")
+    os.remove(__path__[0]+os.sep+"radionpo")
 
+#UNTESTED
 def install():
-    response = urllib2.urlopen("https://github.com/NAMB-develop/namb_npo/archive/master.zip") #TODO: Implement versioning
+    response = urllib2.urlopen("https://github.com/NAMB-develop/namb_radionpo/archive/master.zip") #TODO: Implement versioning
     zipcontent = response.read()
     s=StringIO.StringIO(zipcontent)
     try:
@@ -25,6 +30,7 @@ def install():
     l=z.namelist()
 
     for i in z.filelist:
+        #i.filename=''.join(i.filename.split('namb_'))
         i.filename=''.join(i.filename.split('-master'))
 
     for i in l:
@@ -34,5 +40,5 @@ def install():
     return True
 
 def load():
-    MODULE=importlib.import_module("plugins.npo.namb_npo")
+    MODULE=importlib.import_module("plugins.radionpo.namb_radionpo")
     return MODULE

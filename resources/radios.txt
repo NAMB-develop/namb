@@ -1,0 +1,4 @@
+http://radioplayer.npo.nl/data/radiobox2/nowonair/4.json
+http://radioplayer.npo.nl/data/radiobox2/nowonair/2.json
+http://radioplayer.npo.nl/data/radiobox2/nowonair/1.json
+http://radioplayer.npo.nl/data/radiobox2/nowonair/3.json
